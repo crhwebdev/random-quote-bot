@@ -1,3 +1,6 @@
 RANDOM QUOTE BOT
 =========================================================
 
+1. Can ping it with '!ping' command in a chat channel
+2. it posts a text message to whatever channel it was pinged from
+3. it pulls from large number of quotes stored on server as enviromental variable and posts a random one
