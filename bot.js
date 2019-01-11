@@ -15,9 +15,14 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-  if (message.content === '!ping') {
-    // message.reply(getRandomQuote(quotes));
-    message.channel.send(getRandomQuote(quotes));
+  if (message.content.startsWith('!quote')) {
+    let user = message.mentions.users.first();
+    if (user) {
+      // console.log(user);
+      message.channel.send('<' + '@' + user.id + '>' + getRandomQuote(quotes));
+    } else {
+      message.channel.send(getRandomQuote(quotes));
+    }
     message.delete(10).catch(console.error);
   }
 });
