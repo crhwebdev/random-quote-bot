@@ -9,24 +9,28 @@ const inputFile = process.argv[2];
 const outputFile = process.argv[3];
 let lines = [];
 
-//open inputfile
+const writeLinesToOutput = function(lines, output) {
+  //write data to output file
+  let data = JSON.stringify(lines);
+  fs.writeFile(output, data, (err, data) => {
+    if (err) console.log(err);
+    console.log('Have succesffuly parsed the file.');
+  });
+};
+
+//create readline interface
 let rl = readline.createInterface({
   input: fs.createReadStream(inputFile)
 });
 
-let line_no = 0;
-
 //read each line into lines list
+let line_no = 0;
 rl.on('line', line => {
   line_no++;
   lines.push(line);
 });
 
+//write lines to output file once read stream closes
 rl.on('close', line => {
-  //write data to output file
-  let data = JSON.stringify(lines);
-  fs.writeFile(outputFile, data, (err, data) => {
-    if (err) console.log(err);
-    console.log('Have succesffuly parsed the file.');
-  });
+  writeLinesToOutput(lines, outputFile);
 });
