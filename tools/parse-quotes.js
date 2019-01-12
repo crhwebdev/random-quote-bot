@@ -9,9 +9,14 @@ const inputFile = process.argv[2] || '/data/input.txt';
 const outputFile = process.argv[3] || '/data/output.json';
 let inputFileLines = [];
 
+const dedupeLines = function(lines) {
+  let unique = [...new Set(lines)];
+  return unique;
+};
+
 const writeLinesToOutput = function(lines, output) {
   console.log('Writing data to output file');
-  let linesToWrite = lines;
+  let linesToWrite = dedupeLines(lines);
   //write data to output file
   let data = JSON.stringify(linesToWrite);
   fs.writeFile(output, data, (err, data) => {
