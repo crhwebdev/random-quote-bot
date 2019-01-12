@@ -5,13 +5,15 @@
 */
 const readline = require('readline');
 const fs = require('fs');
-const inputFile = process.argv[2];
-const outputFile = process.argv[3];
-let lines = [];
+const inputFile = process.argv[2] || '/data/input.txt';
+const outputFile = process.argv[3] || '/data/output.json';
+let inputFileLines = [];
 
 const writeLinesToOutput = function(lines, output) {
+  console.log('Writing data to output file');
+  let linesToWrite = lines;
   //write data to output file
-  let data = JSON.stringify(lines);
+  let data = JSON.stringify(linesToWrite);
   fs.writeFile(output, data, (err, data) => {
     if (err) console.log(err);
     console.log('Have succesffuly parsed the file.');
@@ -27,10 +29,27 @@ let rl = readline.createInterface({
 let line_no = 0;
 rl.on('line', line => {
   line_no++;
-  lines.push(line);
+  inputFileLines.push(line);
 });
 
 //write lines to output file once read stream closes
 rl.on('close', line => {
-  writeLinesToOutput(lines, outputFile);
+  //check to see if outputFile exists
+  fs.stat(outputFile, (err, stats) => {
+    //if it does not exist, then just write inputFileLines to outputFile
+    if (err) {
+      console.log('Output file does not exist. Creating file....');
+      writeLinesToOutput(inputFileLines, outputFile);
+      //if it does exist, then read in files from existing outputFile
+      // parse them to an array, concat new outputFileLines with inputFileLines
+      // and then write combined array to file
+    } else {
+      console.log('Output file exists.');
+      fs.readFile(outputFile, 'utf8', (err, contents) => {
+        let outputFileLines = JSON.parse(contents);
+        let combinedFileLines = outputFileLines.concat(inputFileLines);
+        writeLinesToOutput(combinedFileLines, outputFile);
+      });
+    }
+  });
 });

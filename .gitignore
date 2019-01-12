@@ -3,3 +3,4 @@ docs/DESIGN.md
 config/dev.js
 quotes/dev.js
 tools/data
+.vscode
