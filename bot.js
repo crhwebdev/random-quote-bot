@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const keys = require('./config/keys');
-const quotes = require('./quotes/quote');
+const quotes = require('./data/quotes');
 const client = new Discord.Client();
 
 const getRandomQuote = quoteArray => {

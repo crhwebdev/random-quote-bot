@@ -34,7 +34,9 @@ const parseQuotes = function(inputFile, outputFile) {
   let line_no = 0;
   rl.on('line', line => {
     line_no++;
-    inputFileLines.push(line);
+    if (line != '') {
+      inputFileLines.push(line);
+    }
   });
 
   //write input file lines to output file once read stream closes
