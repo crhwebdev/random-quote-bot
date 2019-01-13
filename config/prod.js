@@ -1,3 +1,4 @@
 module.exports = {
-  discordToken: process.env.discordToken
+  discordToken: process.env.discordToken,
+  commandName: process.env.commandName
 };
