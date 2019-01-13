@@ -1,6 +1,6 @@
 node_modules
+data/dev.js
 docs/DESIGN.md
 config/dev.js
-data/dev.js
 tools/data
 .vscode
