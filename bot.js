@@ -15,8 +15,9 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-  const command = keys.commandName || 'quote';
-  if (message.content.startsWith('!pm' + command)) {
+  const command = keys.commandName.toLowerCase() || 'quote';
+
+  if (message.content.toLowerCase().startsWith('!pm' + command)) {
     let user = message.mentions.users.first();
     if (user) {
       user.send(getRandomQuote(quotes));
@@ -24,7 +25,7 @@ client.on('message', message => {
       console.error('Tried to use !pmquote without a user name');
     }
     message.delete(10).catch(console.error);
-  } else if (message.content.startsWith('!' + command)) {
+  } else if (message.content.toLowerCase().startsWith('!' + command)) {
     let user = message.mentions.users.first();
     if (user) {
       // console.log(user);
