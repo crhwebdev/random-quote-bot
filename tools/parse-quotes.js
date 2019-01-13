@@ -64,4 +64,20 @@ const parseQuotes = function(inputFile, outputFile) {
 
 const input = process.argv[2] || path.join(__dirname, '/data/input.txt');
 const output = process.argv[3] || path.join(__dirname, '/data/output.json');
+
+/*
+   `parse-quotes [filename]` -> parses file into default output
+   `parse-quotes [filename] [filename]` -> parses file to second listed file as output
+   `parse-quotes -i [filename] [filename] ...  -o [filename] -> parses sequence of files to output file (can also use without -o)   
+ */
+
+//use real expression to parse into groups of input files, output file
+//if there is an input list, then iterate through it and add each file one by one to output
+//if there is an output, use it for output file; otherwise, use default
+
+//if no -i or -o flags, then just take first argument as input
+//if no input, then use default
+//use second argument as output
+//if no output, then use default
+
 parseQuotes(input, output);
