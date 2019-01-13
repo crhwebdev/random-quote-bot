@@ -1,7 +1,7 @@
 {
   "name": "random-quote-bot",
   "version": "1.0.0",
-  "description": "Says random quotes from Ram Ranch",
+  "description": "Says random quotes from songs",
   "main": "bot.js",
   "author": "Carl Hain",
   "dependencies": {
