@@ -1,0 +1,4 @@
+Running the application will create two logs in this directory:
+
+combined.log holds general application messages
+error.log holds any errors that occur
