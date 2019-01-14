@@ -2,9 +2,14 @@ const keys = require('./config/keys');
 const quotes = require('./data/quotes');
 
 const winston = require('winston');
+
+const loggerFormat = winston.format.printf(info => {
+  return `${info.timestamp} ${info.level}: ${info.message}`;
+});
+
 const logger = winston.createLogger({
   level: 'info',
-  format: winston.format.json(),
+  format: winston.format.combine(winston.format.timestamp(), loggerFormat),
   defaultMeta: { service: 'user-service' },
   transports: [
     new winston.transports.File({
