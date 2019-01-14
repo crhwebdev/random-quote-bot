@@ -3,4 +3,6 @@ data/local.json
 docs/DESIGN.md
 config/dev.js
 tools/data
+logs/combined.log
+logs/error.log
 .vscode
