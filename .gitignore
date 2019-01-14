@@ -1,5 +1,5 @@
 node_modules
-data/dev.js
+data/local.json
 docs/DESIGN.md
 config/dev.js
 tools/data
