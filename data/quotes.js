@@ -11,6 +11,7 @@ module.exports = async function() {
     } else {
       quotes = require('./local.json');
     }
+
     return quotes;
   }
 };

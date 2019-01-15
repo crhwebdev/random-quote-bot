@@ -1,11 +1,10 @@
 const keys = require('./config/keys');
 
+//configure logger
 const winston = require('winston');
-
 const loggerFormat = winston.format.printf(info => {
   return `${info.timestamp} ${info.level}: ${info.message}`;
 });
-
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(winston.format.timestamp(), loggerFormat),
@@ -19,21 +18,29 @@ const logger = winston.createLogger({
   ]
 });
 
-//Setup data
-const Quotes = require('./data/quotes.js');
+//function to retrieve a random quote
+const getRandomQuote = quoteArray => {
+  let randomIndex = Math.floor(
+    Math.random() * Math.floor(quoteArray.length - 1)
+  );
+  return quoteArray[randomIndex];
+};
 
+//function to setup and run bot
 const bot = async function() {
+  //Setup data for application
+  const Quotes = require('./data/quotes.js');
   const quotes = await Quotes();
+
+  if (!quotes || quotes.length < 1) {
+    logger.error('No quotes available!');
+    console.log('ERROR: no quotes available!');
+    process.exit(1);
+  }
+
   //setup Discord client
   const Discord = require('discord.js');
   const client = new Discord.Client();
-
-  const getRandomQuote = quoteArray => {
-    let randomIndex = Math.floor(
-      Math.random() * Math.floor(quoteArray.length - 1)
-    );
-    return quoteArray[randomIndex];
-  };
 
   client.on('ready', () => {
     logger.info(`Logged in as ${client.user.tag}!`);
