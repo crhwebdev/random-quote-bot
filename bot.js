@@ -48,7 +48,6 @@ const bot = async function() {
 
   client.on('message', message => {
     const command = keys.commandName.toLowerCase() || 'quote';
-
     if (message.content.toLowerCase().startsWith('!pm' + command)) {
       let user = message.mentions.users.first();
       if (user) {
@@ -60,14 +59,18 @@ const bot = async function() {
       }
       message.delete(10).catch(console.error);
     } else if (message.content.toLowerCase().startsWith('!' + command)) {
-      let user = message.mentions.users.first();
-      if (user) {
-        message.channel.send(
-          '<' + '@' + user.id + '>' + getRandomQuote(quotes)
-        );
-      } else {
-        message.channel.send(getRandomQuote(quotes));
+      const users = message.mentions.users;
+      let mentionsTag = '';
+      if (users.first()) {
+        for (user of users) {
+          /* must call to user[1].id instead of user.id because iterated user
+           is an array starting with user id and then user object */
+          mentionsTag += '<@' + user[1].id + '>' + ',';
+        }
+        //remove trailing comma
+        mentionsTag = mentionsTag.substring(0, mentionsTag.length - 1);
       }
+      message.channel.send(getRandomQuote(quotes) + mentionsTag);
       message.delete(10).catch(console.error);
     }
   });
