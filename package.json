@@ -6,6 +6,7 @@
   "author": "Carl Hain",
   "dependencies": {
     "discord.js": "^11.4.2",
+    "nodemon": "^1.18.9",
     "winston": "^3.1.0"
   }
 }
