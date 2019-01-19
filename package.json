@@ -5,11 +5,12 @@
   "main": "bot.js",
   "author": "Carl Hain",
   "scripts": {
-    "start": "nodemon bot.js"
+    "start": "pm2 start bot.js",
+    "stop": "pm2 stop bot"
   },
   "dependencies": {
     "discord.js": "^11.4.2",
-    "nodemon": "^1.18.9",
+    "pm2": "^3.2.9",
     "winston": "^3.1.0"
   }
 }
