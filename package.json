@@ -4,6 +4,9 @@
   "description": "Says random quotes from songs",
   "main": "bot.js",
   "author": "Carl Hain",
+  "scripts": {
+    "start": "nodemon bot.js"
+  },
   "dependencies": {
     "discord.js": "^11.4.2",
     "nodemon": "^1.18.9",
