@@ -62,8 +62,8 @@ const parseQuotes = function(inputFile, outputFile) {
   });
 };
 
-const input = process.argv[2] || path.join(__dirname, '/data/input.txt');
-const output = process.argv[3] || path.join(__dirname, '/data/output.json');
+const input = process.argv[2] || path.join(__dirname, 'data', 'input.txt');
+const output = process.argv[3] || path.join(__dirname, 'data', 'output.json');
 
 /*
    `parse-quotes [filename]` -> parses file into default output
